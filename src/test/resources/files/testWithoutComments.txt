@@ -1,0 +1,13 @@
+package com.alexfaster.model;
+
+import java.util.List;
+
+public abstract class Node {
+
+    private String name;
+
+    public Node(final String name) {
+        this.name = name;
+    }
+
+}
