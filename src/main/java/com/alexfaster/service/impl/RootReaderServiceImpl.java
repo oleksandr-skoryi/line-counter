@@ -8,6 +8,7 @@ import com.alexfaster.service.RootReaderService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class RootReaderServiceImpl implements RootReaderService {
 
@@ -46,5 +47,18 @@ public class RootReaderServiceImpl implements RootReaderService {
             }
         }
         return directoryNode;
+    }
+
+    public void showTree(Node root) {
+        List<Node> children = root.getChildren();
+        System.out.println(root);
+        if (!children.isEmpty()) {
+            for (Node node : children) {
+                System.out.println(node);
+                if (!node.getChildren().isEmpty()) {
+                    showTree(node);
+                }
+            }
+        }
     }
 }

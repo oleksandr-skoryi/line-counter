@@ -1,6 +1,5 @@
 package com.alexfaster.service;
 
-import com.alexfaster.model.Node;
 import com.alexfaster.service.impl.RootReaderServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -60,16 +58,4 @@ class RootReaderServiceTest {
                 .getFile());
     }
 
-    private void showTree(Node root) {
-        List<Node> children = root.getChildren();
-        System.out.println(root);
-        if (!children.isEmpty()) {
-            for (Node node : children) {
-                System.out.println(node);
-                if (!node.getChildren().isEmpty()) {
-                    showTree(node);
-                }
-            }
-        }
-    }
 }
