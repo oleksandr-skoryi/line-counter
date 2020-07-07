@@ -20,6 +20,6 @@ public abstract class Node {
 
     @Override
     public String toString() {
-        return "name: " + getName() + " linecount: " + getLineCount();
+        return getName() + " : " + getLineCount();
     }
 }

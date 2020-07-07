@@ -32,12 +32,12 @@ public class RootReaderServiceImpl implements RootReaderService {
 
     private Node handleFile(final File file) {
         var lines = fileAnalyzerService.countLines(file);
-        return new FileNode(file.getAbsolutePath(), lines);
+        return new FileNode(file.getName(), lines);
     }
 
     private Node handleDirectory(final File file) {
         var files = file.listFiles();
-        var directoryNode = new DirectoryNode(file.getAbsolutePath());
+        var directoryNode = new DirectoryNode(file.getName());
         for (int i = 0; files != null && i < files.length; i++) {
             var currentNode = files[i];
             if (currentNode.isDirectory()) {
@@ -49,16 +49,29 @@ public class RootReaderServiceImpl implements RootReaderService {
         return directoryNode;
     }
 
-    public void showTree(Node root) {
+    public void showTree(final Node root) {
+        printNode(root, 0);
+        showTreeHelper(root, 4);
+    }
+
+    private void showTreeHelper(final Node root, final int shift) {
         List<Node> children = root.getChildren();
-        System.out.println(root);
         if (!children.isEmpty()) {
             for (Node node : children) {
-                System.out.println(node);
+                printNode(node, shift);
                 if (!node.getChildren().isEmpty()) {
-                    showTree(node);
+                    showTreeHelper(node, shift + 4);
                 }
             }
         }
+    }
+
+    private void printNode(final Node node, final int shift) {
+        var sb = new StringBuilder();
+        for (int i = 0; i < shift; i++) {
+            sb.append(" ");
+        }
+        sb.append(node);
+        System.out.println(sb.toString());
     }
 }
